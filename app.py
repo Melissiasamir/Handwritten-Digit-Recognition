@@ -22,7 +22,7 @@ st.markdown(
         text-align: center;
     }
     .card {
-        background: transparent;   /* no background */
+        background: transparent;
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.25);
@@ -41,28 +41,21 @@ st.title("✏️ MNIST Digit Classifier")
 st.markdown("<p style='text-align:center'>Draw or upload a digit (0–9) and let the CNN model predict it 🚀</p>", unsafe_allow_html=True)
 
 # ------------------- Load Model -------------------
-MODEL_PATH = tf.keras.models.load_model("cnn_mnist.h5")
-
-
-if not os.path.exists(MODEL_PATH):
-    st.error("Model file not found! Please upload or train it.")
-else:
-    model = tf.keras.models.load_model(MODEL_PATH)
-
-
-@st.cache_resource
-def load_cnn_model():
-    return load_model(MODEL_PATH)
+MODEL_PATH = "cnn_mnist.h5"   # أو "saved_models/cnn_mnist.h5" حسب مكان الملف
 
 if not os.path.exists(MODEL_PATH):
     st.error(f"❌ Model not found at {MODEL_PATH}. Please train and save it first.")
     st.stop()
 
+@st.cache_resource
+def load_cnn_model():
+    return load_model(MODEL_PATH)
+
 model = load_cnn_model()
 
 # ------------------- Preprocessing + Prediction -------------------
 def preprocess_and_predict(img_pil, model):
-    original = img_pil.resize((100, 100))  # for preview
+    original = img_pil.resize((100, 100))  # preview input
 
     img = img_pil.convert("L")
     img = ImageOps.invert(img)
@@ -70,7 +63,7 @@ def preprocess_and_predict(img_pil, model):
     arr = np.array(img).astype("float32") / 255.0
     arr = arr.reshape(1, 28, 28, 1)
 
-    preds = model.predict(arr)[0]
+    preds = model.predict(arr, verbose=0)[0]
     top_class = np.argmax(preds)
     confidence = preds[top_class]
 
@@ -122,7 +115,7 @@ with col3:
         # Probability chart
         fig, ax = plt.subplots(figsize=(3, 2.5))
         bars = ax.bar(np.arange(10), preds, color="#95A5A6")
-        bars[top_class].set_color("#2E86C1")  # Highlight prediction in blue
+        bars[top_class].set_color("#2E86C1")  # highlight predicted digit
         ax.set_xticks(np.arange(10))
         ax.set_xlabel("Digit")
         ax.set_ylabel("Probability")
