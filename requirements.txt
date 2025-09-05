@@ -1,4 +1,10 @@
+streamlit
 numpy
-pandas
+Pillow
+tensorflow
 matplotlib
+seaborn
+streamlit-drawable-canvas
+tensorflow
+pandas
 scikit-learn
