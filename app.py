@@ -41,7 +41,12 @@ st.title("✏️ MNIST Digit Classifier")
 st.markdown("<p style='text-align:center'>Draw or upload a digit (0–9) and let the CNN model predict it 🚀</p>", unsafe_allow_html=True)
 
 # ------------------- Load Model -------------------
-MODEL_PATH =tf.keras.models.load_model("saved_models/cnn_mnist.keras")
+MODEL_PATH = "cnn_mnist.keras"
+
+if not os.path.exists(MODEL_PATH):
+    st.error("Model file not found! Please upload or train it.")
+else:
+    model = tf.keras.models.load_model(MODEL_PATH)
 
 
 @st.cache_resource
