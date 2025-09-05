@@ -4,16 +4,6 @@ This project implements Handwritten Digit Recognition using the MNIST dataset
 .
 It includes training both a Multi-Layer Perceptron (MLP) and a Convolutional Neural Network (CNN), comparing their performance, visualizing results, and deploying with Streamlit.
 
-📂 Project Structure
-handwritten-digit-recognition/
-│── app.py                     # Streamlit app for digit recognition
-│── main.py                    # Training code (MLP + CNN)
-│── saved_models/              # Trained models
-│   └── cnn_mnist.h5           # Saved CNN model
-│── notebooks/                 # Jupyter notebooks (optional experiments)
-│── requirements.txt           # Dependencies
-│── README.md                  # Documentation
-
 ⚡ Features
 
 Load and preprocess MNIST dataset
@@ -85,5 +75,6 @@ Features:
 📤 Upload digit images
 
 🔮 Predict digit with probability chart
+
 
 
