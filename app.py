@@ -41,7 +41,7 @@ st.title("✏️ MNIST Digit Classifier")
 st.markdown("<p style='text-align:center'>Draw or upload a digit (0–9) and let the CNN model predict it 🚀</p>", unsafe_allow_html=True)
 
 # ------------------- Load Model -------------------
-MODEL_PATH = r"C:\Users\Msi\OneDrive\Documents\NTI\AI-AU25\deep learning\handwritten\saved_models\cnn_mnist.keras"
+MODEL_PATH =tf.keras.models.load_model("saved_models/cnn_mnist.keras")
 
 
 @st.cache_resource
